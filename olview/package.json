@@ -1,0 +1,16 @@
+{
+  "name": "COG viewer",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "7.1.2"
+  },
+  "dependencies": {
+    "ol": "latest",
+    "proj4": "^2.19.10"
+  }
+}
