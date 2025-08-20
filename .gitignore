@@ -1,0 +1,4 @@
+*.tif
+*.tif.aux.xml
+*_*.qgz
+get_*_k8s_heat.sh
