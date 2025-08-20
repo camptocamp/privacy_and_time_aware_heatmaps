@@ -9,7 +9,7 @@ from psycopg import sql
 from typing import Tuple
 import rasterio
 from rasterio.crs import CRS
-from os import environ, path
+from os import environ
 
 
 # Something like:
@@ -35,13 +35,21 @@ def save_canvas(canvas):
     with rasterio.open(
         './heat.tif',
         'w',
-        driver='GTiff',
         height=proj.height,
         width=proj.width,
         count=1,
         dtype=rasterio.uint32,
         crs=CRS.from_epsg(2056),
         transform=rasterio.transform.from_bounds(proj.minx, proj.miny, proj.maxx, proj.maxy, proj.width, proj.height),
+        # Driver and custom options
+        driver='cog',
+        nodata=0,
+        SPARSE_OK="TRUE",
+        STATISTICS="YES",
+        GEOTIFF_VERSION="1.1",
+        OVERVIEWS="IGNORE_EXISTING",
+        COMPRESS="LERC_ZSTD",
+        PREDICTOR=2,
     ) as dst:
         dst.write(flipped_canvas, 1)
 
